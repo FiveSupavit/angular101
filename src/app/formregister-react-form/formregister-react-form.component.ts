@@ -56,6 +56,8 @@ export class FormregisterReactFormComponent implements OnInit {
         'secret': new FormControl('car'),
         'hobbies': new FormArray([])
     });
+
+    this.onAddHobby();
   }
 
   onAddHobby() {
@@ -82,6 +84,7 @@ export class FormregisterReactFormComponent implements OnInit {
 
     //console.log(this.registerForm);
     this.onReset();
+    this.onAddHobby();
   }
 
   onReset() {
