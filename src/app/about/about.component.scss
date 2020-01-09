@@ -1,0 +1,15 @@
+.box-slide ::ng-deep {
+  .overlay-left,.overlay-right {
+      background-color: rgba(245, 245, 245, 0.3) !important;
+      width : 4rem;
+      /*background-color: transparent !important;*/
+  }
+}
+
+.box-slide ::ng-deep #slider-buttons-left {
+  left : 20px !important;
+}
+
+.box-slide ::ng-deep #slider-buttons-right {
+  right : 20px !important;
+}

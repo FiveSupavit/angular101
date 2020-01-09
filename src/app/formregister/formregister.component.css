@@ -1,0 +1,16 @@
+.lb-radio{
+  margin-right: 10px
+}
+
+.card-block {
+  background-color: rgba(245, 245, 245, 0.4);
+  padding: 1rem;
+}
+
+input.ng-invalid.ng-touched {
+  border: solid 1px red;
+}
+
+span.help-block {
+  color : red;
+}

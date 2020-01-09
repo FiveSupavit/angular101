@@ -1,0 +1,56 @@
+<!--property binding , event binding , databinding-->
+<h3>Student Name</h3>
+<form>
+  <div class="form-group">
+    <input type="text"
+           class="form-control t1"
+           (input)="onUpdateStudentName($event)">
+  </div>
+  <!--Two-Way binding = [(ngModel)] , One-Way binding= [ngModel] ต่างกันที่วงเล็บ-->
+  <!--
+  <input type="text"
+        class="form-control"
+        [ngModel]="studentNewName">
+  <input type="text"
+        class="form-control"
+        [(ngModel)]="studentNewName">
+  <p>{{ studentNewName }}</p>
+
+  <div class="form-group">
+    <button type="button" class="btn btn-primary"
+            [disabled]="!allowNewStudent"
+            (click)="onCreateStudent()">Add Student</button>
+  </div>
+</form>
+<!--<p>button status : {{ allowNewStudent }}</p>-->
+<!--<p>{{ studentCreationStatus }}</p>-->
+<hr>
+<p *ngIf="studentCreated; else noStudent">Student created, student name is {{ studentNewName }}</p>
+<ng-template #noStudent>
+    <p>No Student created!</p>
+</ng-template>
+
+<!--<p>Student Name: {{ studentName }} with ID: {{ studentId }} ||get from variable</p>-->  <!--ตัวแปรใน .ts-->
+<!--<p>Student Name: {{ onGetName() }} with ID: {{ onGetId() }} ||get from function</p>-->  <!--ฟังก์ชั่นใน .ts-->
+
+<!--
+<p [ngStyle]="{ color: getColorStatus(studentStatus) }"
+   [ngClass]="{ fontBold: true}">
+    Student Name: {{ studentName }}
+    with ID: {{ studentId }}
+    Status: {{ studentStatus }}</p>
+<p [ngStyle]="{ color: studentStatus2 === 'จบแล้ว' ? 'green' : 'red'}"
+   [ngClass]="{ fontBold: studentStatus2 === 'จบแล้ว' ? true : false }">
+    Student Name: {{ studentName2 }}
+    with ID: {{ studentId2 }}
+    Status: {{ studentStatus2 }}</p>
+-->
+<p *ngFor="let item of studentList; let n = index;"
+   [ngStyle]="{ color: getColorStatus(item.studentStatus) }"
+   [ngClass]="{ fontBold: item.studentStatus === 'จบแล้ว' ? true : false}">
+    Index: {{ n }}
+    Student Name: {{ item.studentName }}
+    with ID: {{ item.studentId }}
+    Status: {{ item.studentStatus }}</p>
+
+<hr>

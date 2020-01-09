@@ -1,0 +1,110 @@
+<div class="col-md-12 card-block">
+  <h3>Registering Student</h3><hr>
+  <div class="row">
+      <div class="col-md-5" >
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div formGroupName="userData">
+                  <div class="form-group">
+                      <label for="fullName">Full Name</label>
+                      <input type="text"
+                             id="fullName"
+                             class="form-control"
+                             name="fullName"
+                             formControlName="fullName">
+                      <!--ถ้าไม่ได้อยู่ใน group สามารถเขียน registerForm.get('fullName') ได้เลย -->
+                      <span *ngIf="!registerForm.get('userData.fullName').valid && registerForm.get('userData.fullName').touched"
+                             class="help-block">Please enter a valid Full Name!</span>
+                  </div>
+                  <div class="form-group">
+                      <label for="email">E-Mail</label>
+                      <input type="email"
+                             id="email"
+                             class="form-control"
+                             formControlName="email">
+                       <span *ngIf="!registerForm.get('userData.email').valid && registerForm.get('userData.email').touched"
+                              class="help-block">Please enter a valid E-Mail!</span>
+                  </div>
+                  <div class="form-group">
+                      <div class="radio">
+                          <label class="lb-radio">
+                              <input type="radio"
+                                     id="sexMale"
+                                     value="Male"
+                                     formControlName="sex">
+                              ชาย
+                          </label>
+                          <label class="lb-radio">
+                              <input type="radio"
+                                     id="sexFemale"
+                                     value="Female"
+                                     formControlName="sex">
+                              หญิง
+                          </label>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text"
+                             id="username"
+                             class="form-control"
+                             formControlName="username">
+                       <span *ngIf="!registerForm.get('userData.username').valid && registerForm.get('userData.username').touched"
+                              class="help-block">Please enter a valid Username!</span>
+                  </div>
+                  <button class="btn btn-outline-dark"
+                          (click)="suggestUserName()"
+                          type="button">Suggest an Username</button>
+                  <hr>
+              </div>
+              <div class="form-group">
+                  <label for="secret">Secret Questions</label>
+                  <select id="secret"
+                          class="form-control"
+                          formControlName="secret">
+                      <option value="pet">สัตว์เลี้ยงตัวแรกของคุณ?</option>
+                      <option value="teacher">ครูคนแรกของคุณ?</option>
+                      <option value="car">รถคันแรกของคุณ?</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <div formArrayName="hobbies">
+                      <label>Your Hobbies</label>
+                      <div class="form-group">
+                          <button
+                              class="btn btn-outline-dark"
+                              type="button"
+                              (click)="onAddHobby()">Add Hobby</button>
+                      </div>
+                      <div class="form-group"
+                          *ngFor="let hobby of getHobbies(); let i = index">
+                          <div class="is-relative">
+                            <input type="text" class="form-control is-1" [formControlName]="i">
+                            <span>
+                              <fa-icon class="is-2" [icon]="faTimes" *ngIf="i > 0" (click)="getHobbies().splice(i, 1)"></fa-icon>
+                            </span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <div class="form-group">
+                <span *ngIf="!registerForm.valid && registerForm.touched"
+                       class="help-block">Please enter a valid</span>
+              </div>
+              <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid">
+                  <fa-icon [icon]="faPencilAlt"></fa-icon> ลงทะเบียน
+              </button>
+          </form>
+      </div>
+      <div class="col-md-7" *ngIf="submitted">
+          <h5>Output Data:</h5>
+          <hr>
+          <p>Full Name: {{ user.userData.fullName }}</p>
+          <p>Username: {{ user.userData.username }}</p>
+          <p>E-Mail: {{ user.userData.email }}</p>
+          <p>Sex: {{ user.userData.sex }}</p>
+          <p>Secret: {{ user.secret }}</p>
+          <p>Your hobbies: {{ user.hobbies }}</p>
+      </div>
+  </div>
+</div>
